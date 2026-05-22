@@ -52,6 +52,10 @@ const ALLOWED_FIELDS = new Set([
   "appartenance_du_conducteur",
   "type_de_verification",
   "region",
+  "presence_licence_transport",
+  "numero_licence",
+  "presentation_permis_conduire",
+  "verification_liste_nominative",
   "agences_antennes",
   "tournee",
   "pda",
@@ -65,10 +69,12 @@ const ALLOWED_FIELDS = new Set([
   "commentaires_vehicule",
   "actions_commentaires_divers",
   "chauffeur_sorti_effectifs",
-  "sanction_rh",
   "is_surete",
   "jour",
-  "heure_arrondie"
+  "heure_arrondie",
+  "anomalie_list",
+  "anomalie_vehicule_list",
+  "anomalie_tournee_list"
 ]);
 
 const REQUIRED_FIELDS = ["date", "type_de_verification", "region", "anomalie"];
@@ -77,6 +83,19 @@ function cleanText(value) {
   if (value === undefined || value === null) return null;
   const text = String(value).trim();
   return text === "" ? null : text;
+}
+
+function normalizeTextArray(value, fallback = "Aucune anomalie") {
+  if (Array.isArray(value)) {
+    const cleaned = value.map((v) => cleanText(v)).filter(Boolean);
+    return cleaned.length ? cleaned : [fallback];
+  }
+  const text = cleanText(value);
+  if (!text) return [fallback];
+  return text
+    .split(";")
+    .map((v) => cleanText(v))
+    .filter(Boolean);
 }
 
 function listToSemiColon(value) {
@@ -120,6 +139,10 @@ function preprocessing(rawPayload) {
   payload.type_de_verification = cleanText(payload.type_de_verification);
   payload.region = cleanText(payload.region);
   payload.anomalie = cleanText(payload.anomalie);
+  payload.presence_licence_transport = cleanText(payload.presence_licence_transport);
+  payload.numero_licence = cleanText(payload.numero_licence);
+  payload.presentation_permis_conduire = cleanText(payload.presentation_permis_conduire);
+  payload.verification_liste_nominative = cleanText(payload.verification_liste_nominative);
   payload.agences_antennes = cleanText(payload.agences_antennes);
   payload.tournee = cleanText(payload.tournee);
   payload.pda = cleanText(payload.pda)?.toUpperCase() || null;
@@ -129,12 +152,16 @@ function preprocessing(rawPayload) {
   payload.commentaires_vehicule = cleanText(payload.commentaires_vehicule);
   payload.actions_commentaires_divers = cleanText(payload.actions_commentaires_divers);
 
-  payload.anomalie_de_chargement = listToSemiColon(payload.anomalie_de_chargement) || "Aucune anomalie";
-  payload.anomalie_de_vehicule = listToSemiColon(payload.anomalie_de_vehicule) || "Aucune anomalie";
-  payload.anomalie_suivi_de_tournee =
-    listToSemiColon(payload.anomalie_suivi_de_tournee) || "Aucune anomalie";
+  payload.anomalie_de_chargement = normalizeTextArray(payload.anomalie_de_chargement);
+  payload.anomalie_de_vehicule = normalizeTextArray(payload.anomalie_de_vehicule);
+  payload.anomalie_suivi_de_tournee = normalizeTextArray(payload.anomalie_suivi_de_tournee);
 
-  payload.is_surete = payload.is_surete === true || payload.is_surete === "true";
+  payload.anomalie_list = listToSemiColon(payload.anomalie_de_chargement);
+  payload.anomalie_vehicule_list = listToSemiColon(payload.anomalie_de_vehicule);
+  payload.anomalie_tournee_list = listToSemiColon(payload.anomalie_suivi_de_tournee);
+
+  payload.is_surete =
+    payload.is_surete === true || payload.is_surete === "true" ? "true" : "false";
 
   const start = payload.heure_de_debut ? new Date(payload.heure_de_debut) : new Date();
   const end = payload.heure_de_fin ? new Date(payload.heure_de_fin) : start;

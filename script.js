@@ -260,7 +260,6 @@ function preprocessDf2(raw) {
     commentaires_vehicule: cleanText(raw.commentaires_anomalie),
     actions_commentaires_divers: cleanText(raw.commentaires_divers),
     chauffeur_sorti_effectifs: null,
-    sanction_rh: null,
     jour: jourFrancais(now),
     heure_arrondie: timeHHMMSS(heureArrondie),
     is_surete: true,
