@@ -24,6 +24,7 @@ body {
     radial-gradient(760px 380px at 105% 0%, #def6ef 0%, transparent 58%),
     var(--bg);
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.45;
 }
 
 .layout {
@@ -127,6 +128,7 @@ fieldset label {
   gap: 8px;
   margin-top: 8px;
   font-weight: 400;
+  line-height: 1.35;
 }
 
 input[type="text"],
@@ -137,9 +139,10 @@ textarea {
   margin-top: 8px;
   border: 1px solid #c9d6e5;
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 12px 12px;
   background: #fff;
-  font-size: 0.96rem;
+  font-size: 1rem;
+  min-height: 44px;
 }
 
 input[type="text"]:focus,
@@ -171,6 +174,8 @@ textarea:focus {
 }
 
 button[type="submit"] {
+  width: 100%;
+  min-height: 48px;
   border: 0;
   border-radius: 999px;
   padding: 12px 22px;
@@ -178,6 +183,7 @@ button[type="submit"] {
   background: linear-gradient(120deg, var(--primary), var(--primary-dark));
   cursor: pointer;
   font-weight: 700;
+  font-size: 1rem;
 }
 
 button[type="submit"]:hover {
@@ -193,12 +199,96 @@ button[type="submit"]:hover {
 
 @media (max-width: 700px) {
   .layout {
-    width: min(1000px, 96vw);
-    margin-top: 16px;
+    width: min(1000px, 97vw);
+    margin-top: 10px;
+    margin-bottom: 22px;
   }
 
   .hero,
   .form-section {
-    padding: 14px;
+    padding: 12px;
+  }
+
+  .hero {
+    border-radius: 14px;
+  }
+
+  .hero h1 {
+    font-size: 1.28rem;
+    line-height: 1.25;
+  }
+
+  .hero-subtitle,
+  .hero-meta {
+    font-size: 0.92rem;
+  }
+
+  .section-head h2 {
+    font-size: 1rem;
+  }
+
+  .question {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .q-num {
+    width: 22px;
+    height: 22px;
+    font-size: 0.78rem;
+    margin-right: 6px;
+  }
+
+  fieldset {
+    padding: 8px 10px 10px;
+  }
+
+  fieldset label {
+    margin-top: 10px;
+    gap: 10px;
+    font-size: 0.96rem;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    flex: 0 0 auto;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  select,
+  textarea {
+    font-size: 16px;
+    min-height: 46px;
+  }
+
+  .hint {
+    font-size: 0.84rem;
+  }
+
+  .submit-result {
+    font-size: 0.94rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .layout {
+    width: 98vw;
+  }
+
+  .hero-kicker {
+    font-size: 0.72rem;
+  }
+
+  .hero h1 {
+    font-size: 1.16rem;
+  }
+
+  .question,
+  fieldset {
+    border-radius: 8px;
   }
 }

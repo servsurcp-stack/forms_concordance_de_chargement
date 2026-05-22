@@ -12,20 +12,33 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
 const TABLE_NAME = process.env.TABLE_NAME || "db_verifications_chargement";
 
+function normalizeOrigin(origin) {
+  if (!origin) return "";
+  return origin.trim().replace(/\/+$/, "").toLowerCase();
+}
+
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || "")
   .split(",")
-  .map((origin) => origin.trim())
+  .map((origin) => normalizeOrigin(origin))
   .filter(Boolean);
 
 app.use(express.json({ limit: "1mb" }));
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+      if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes("*")) {
         callback(null, true);
         return;
       }
-      callback(new Error("Origine non autorisee par CORS."));
+
+      const normalizedOrigin = normalizeOrigin(origin);
+      if (allowedOrigins.includes(normalizedOrigin)) {
+        callback(null, true);
+        return;
+      }
+
+      // On ne throw pas d'erreur CORS pour eviter un 500 "Internal Server Error" peu lisible.
+      callback(null, false);
     }
   })
 );
@@ -191,6 +204,12 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "formulaire.html"));
 });
 
+app.use((err, req, res, next) => {
+  console.error("Unhandled server error:", err);
+  res.status(500).json({ error: "Internal Server Error" });
+});
+
 app.listen(PORT, () => {
   console.log(`Serveur demarre sur http://localhost:${PORT}`);
+  console.log("ALLOWED_ORIGINS:", allowedOrigins.length ? allowedOrigins : "(all)");
 });
