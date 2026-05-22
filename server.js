@@ -56,7 +56,6 @@ const ALLOWED_FIELDS = new Set([
   "tournee",
   "pda",
   "immatriculation",
-  "nom_verificateur",
   "nom_de_la_personne_en_charge",
   "anomalie",
   "anomalie_de_chargement",
@@ -125,7 +124,6 @@ function preprocessing(rawPayload) {
   payload.tournee = cleanText(payload.tournee);
   payload.pda = cleanText(payload.pda)?.toUpperCase() || null;
   payload.immatriculation = cleanText(payload.immatriculation)?.toUpperCase() || null;
-  payload.nom_verificateur = cleanText(payload.nom_verificateur);
   payload.nom_de_la_personne_en_charge = cleanText(payload.nom_de_la_personne_en_charge);
   payload.commentaires_chargement = cleanText(payload.commentaires_chargement);
   payload.commentaires_vehicule = cleanText(payload.commentaires_vehicule);

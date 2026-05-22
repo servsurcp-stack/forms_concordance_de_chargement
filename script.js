@@ -255,7 +255,6 @@ function preprocessDf2(raw) {
     tournee: cleanText(raw.tournee),
     pda: toUpperSafe(raw.lettre_pda),
     immatriculation: immatInfo.immatriculation || toUpperSafe(raw.immatriculation),
-    nom_verificateur: cleanText(raw.personne_verification),
     nom_de_la_personne_en_charge: cleanText(raw.personne_verification),
     commentaires_chargement: cleanText(raw.commentaires_colis),
     commentaires_vehicule: cleanText(raw.commentaires_anomalie),
