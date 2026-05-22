@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verification de concordance de chargement</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="layout">
+    <header class="hero">
+      <p class="hero-kicker">Formulaire agence</p>
+      <h1>Verification de concordance de chargement</h1>
+      <p class="hero-subtitle">Verification documentaire - Etat des vehicules</p>
+      <p class="hero-meta">24 questions - les champs marques <strong>*</strong> sont obligatoires.</p>
+    </header>
+
+    <form id="controle-form" class="form-shell" novalidate>
+      <section class="form-section">
+        <div class="section-head">
+          <h2>1. Generalites</h2>
+        </div>
+
+        <div class="question">
+          <label for="date_controle"><span class="q-num">1</span> Date du controle <span class="required">*</span></label>
+          <input id="date_controle" name="date_controle" type="date" required>
+        </div>
+
+        <div class="question">
+          <label for="personne_verification"><span class="q-num">2</span> Personne en charge de la verification <span class="required">*</span></label>
+          <input id="personne_verification" name="personne_verification" type="text" required>
+        </div>
+
+        <fieldset class="question">
+          <legend><span class="q-num">3</span> Lieu de la verification <span class="required">*</span></legend>
+          <label><input type="radio" name="lieu_verification" value="Agence / Antenne" required> Agence / Antenne</label>
+          <label><input type="radio" name="lieu_verification" value="Delocalise"> Delocalise</label>
+        </fieldset>
+
+        <fieldset class="question">
+          <legend><span class="q-num">4</span> Appartenance du conducteur <span class="required">*</span></legend>
+          <label><input type="radio" name="appartenance_conducteur" value="DSP" required> DSP</label>
+          <label><input type="radio" name="appartenance_conducteur" value="COLIS PRIVE"> COLIS PRIVE</label>
+        </fieldset>
+
+        <div class="question">
+          <label for="tournee"><span class="q-num">5</span> N° TOURNEE <span class="required">*</span></label>
+          <input id="tournee" name="tournee" type="text" required>
+        </div>
+
+        <div class="question">
+          <label for="lettre_pda"><span class="q-num">6</span> LETTRE DE PDA <span class="required">*</span></label>
+          <input id="lettre_pda" name="lettre_pda" type="text" required>
+        </div>
+
+        <div class="question">
+          <label for="immatriculation"><span class="q-num">7</span> Immatriculation <span class="required">*</span></label>
+          <input id="immatriculation" name="immatriculation" type="text" required>
+        </div>
+
+        <fieldset class="question">
+          <legend><span class="q-num">8</span> Type de verification <span class="required">*</span></legend>
+          <label><input type="radio" name="type_verification" value="Avant chargement" required> Avant chargement</label>
+          <label><input type="radio" name="type_verification" value="Apres chargement"> Apres chargement</label>
+        </fieldset>
+
+        <fieldset class="question">
+          <legend><span class="q-num">9</span> Region <span class="required">*</span></legend>
+          <label><input type="radio" name="region" value="REGION NORD OUEST" required> REGION NORD OUEST</label>
+          <label><input type="radio" name="region" value="REGION SUD OUEST"> REGION SUD OUEST</label>
+          <label><input type="radio" name="region" value="REGION NORD EST"> REGION NORD EST</label>
+          <label><input type="radio" name="region" value="REGION SUD EST"> REGION SUD EST</label>
+          <label><input type="radio" name="region" value="REGION IDF"> REGION IDF</label>
+        </fieldset>
+
+        <div class="question conditional" id="q10">
+          <label for="agence_sud_est"><span class="q-num">10</span> AGENCES / ANTENNES REGION SUD EST</label>
+          <select id="agence_sud_est" name="agence_sud_est">
+            <option value="">Selectionner une agence / antenne</option>
+            <option value="CE07">Corbas CE07</option>
+            <option value="CE08">Marseille CE08</option>
+            <option value="CE11">Nice CE11</option>
+            <option value="CE26">Chambery CE26</option>
+            <option value="CE28">Quincieux CE28</option>
+            <option value="AT2601">Valence AT2601</option>
+            <option value="AT4201">Saint-Etienne AT4201</option>
+            <option value="AT4202">Roanne AT4202</option>
+            <option value="AT7401">Annecy AT7401</option>
+            <option value="AT8301">Toulon AT8301</option>
+            <option value="AT8302">Frejus AT8302</option>
+            <option value="AT8401">Avignon AT8401</option>
+          </select>
+          <p class="hint">Active quand Region = REGION SUD EST.</p>
+        </div>
+
+        <div class="question conditional" id="q11">
+          <label for="agence_nord_est"><span class="q-num">11</span> AGENCES / ANTENNES REGION NORD EST</label>
+          <select id="agence_nord_est" name="agence_nord_est">
+            <option value="">Selectionner une agence / antenne</option>
+            <option value="CE10">Brebieres CE10</option>
+            <option value="CE13">Nancy CE13</option>
+            <option value="CE14">Dijon CE14</option>
+            <option value="CE20">Reims CE20</option>
+            <option value="CE24">Strasbourg CE24</option>
+            <option value="AT5701">Metz AT5701</option>
+            <option value="AT6801">Colmar AT6801</option>
+            <option value="AT8001">Amiens AT8001</option>
+          </select>
+          <p class="hint">Active quand Region = REGION NORD EST.</p>
+        </div>
+
+        <div class="question conditional" id="q12">
+          <label for="agence_nord_ouest"><span class="q-num">12</span> AGENCES / ANTENNES REGION NORD OUEST</label>
+          <select id="agence_nord_ouest" name="agence_nord_ouest">
+            <option value="">Selectionner une agence / antenne</option>
+            <option value="CE01">Rennes CE01</option>
+            <option value="CE02">Nantes CE02</option>
+            <option value="CE12">Caen CE12</option>
+            <option value="CE21">Niort CE21</option>
+            <option value="CE27">Rouen CE27</option>
+            <option value="AT2201">St Brieuc AT2201</option>
+            <option value="AT2901">Brest AT2901</option>
+            <option value="AT5601">Vannes AT5601</option>
+            <option value="AT5602">Lorient AT5602</option>
+            <option value="AT6101">Alencon AT6101</option>
+            <option value="AT8601">Poitiers AT8601</option>
+          </select>
+          <p class="hint">Active quand Region = REGION NORD OUEST.</p>
+        </div>
+
+        <div class="question conditional" id="q13">
+          <label for="agence_sud_ouest"><span class="q-num">13</span> AGENCES / ANTENNES REGION SUD OUEST</label>
+          <select id="agence_sud_ouest" name="agence_sud_ouest">
+            <option value="">Selectionner une agence / antenne</option>
+            <option value="CE04">Bordeaux CE04</option>
+            <option value="CE05">Toulouse CE05</option>
+            <option value="CE06">Montpellier CE06</option>
+            <option value="CE09">Clermont CE09</option>
+            <option value="CE30">Brive CE30</option>
+            <option value="AT0301">Vichy AT0301</option>
+            <option value="AT1201">Rodez AT1201</option>
+            <option value="AT2490">Perigueux AT2490</option>
+            <option value="AT3301">Bordeaux AT3301</option>
+            <option value="AT4601">Cahors AT4601</option>
+          </select>
+          <p class="hint">Active quand Region = REGION SUD OUEST.</p>
+        </div>
+
+        <div class="question conditional" id="q14">
+          <label for="agence_idf"><span class="q-num">14</span> AGENCES / ANTENNES REGION IDF</label>
+          <select id="agence_idf" name="agence_idf">
+            <option value="">Selectionner une agence / antenne</option>
+            <option value="CE03">Orleans CE03</option>
+            <option value="CE15">Tremblay CE15</option>
+            <option value="CE16">Lisses CE16</option>
+            <option value="CE17">Ferrieres CE17</option>
+            <option value="CE18">Gennevilliers CE18</option>
+            <option value="CE19">Chartres CE19</option>
+            <option value="AT1501">Bourges AT1501</option>
+            <option value="AT3601">Chateauroux AT3601</option>
+            <option value="AT6001">Compiegne AT6001</option>
+            <option value="AT6002">Beauvais AT6002</option>
+            <option value="AT7801">Maurepas AT7801</option>
+            <option value="AT8901">Auxerre AT8901</option>
+          </select>
+          <p class="hint">Active quand Region = REGION IDF.</p>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="section-head">
+          <h2>2. Verification documentaire</h2>
+        </div>
+
+        <fieldset class="question">
+          <legend><span class="q-num">15</span> Presence dans le vehicule de la copie numerotee de la licence de transport</legend>
+          <p class="hint">Si non presentation: contacter le gerant de l entreprise de transport. Un chauffeur ne peut pas livrer sans la copie.</p>
+          <label><input type="radio" name="presence_licence" value="Oui"> Oui</label>
+          <label><input type="radio" name="presence_licence" value="Non"> Non</label>
+        </fieldset>
+
+        <div class="question">
+          <label for="numero_licence"><span class="q-num">16</span> Numero de la licence</label>
+          <input id="numero_licence" name="numero_licence" type="text">
+        </div>
+
+        <fieldset class="question">
+          <legend><span class="q-num">17</span> Presentation du permis de conduire</legend>
+          <p class="hint">Si non presentation: contacter le gerant de l entreprise de transport. Un chauffeur ne peut pas livrer sans permis.</p>
+          <label><input type="radio" name="presentation_permis" value="OUI"> OUI</label>
+          <label><input type="radio" name="presentation_permis" value="NON"> NON</label>
+        </fieldset>
+
+        <fieldset class="question">
+          <legend><span class="q-num">18</span> Verification de la liste nominative des salaries affectes a la prestation</legend>
+          <p class="hint">Verifier que le chauffeur figure dans la liste fournie. Si besoin, demander une mise a jour au gerant.</p>
+          <label><input type="radio" name="liste_nominative" value="OUI"> OUI</label>
+          <label><input type="radio" name="liste_nominative" value="NON mais regularise"> NON mais regularise</label>
+          <label><input type="radio" name="liste_nominative" value="NON"> NON</label>
+        </fieldset>
+      </section>
+
+      <section class="form-section">
+        <div class="section-head">
+          <h2>3. Verification de concordance de chargement - Etat des vehicules</h2>
+        </div>
+
+        <fieldset class="question">
+          <legend><span class="q-num">19</span> ANOMALIE <span class="required">*</span></legend>
+          <label><input type="radio" name="anomalie" value="Oui" required> Oui</label>
+          <label><input type="radio" name="anomalie" value="Non"> Non</label>
+        </fieldset>
+
+        <fieldset class="question conditional" id="q20">
+          <legend><span class="q-num">20</span> ANOMALIE DE CHARGEMENT</legend>
+          <label><input type="checkbox" name="anomalie_chargement" value="Colis en cabine"> Colis en cabine</label>
+          <label><input type="checkbox" name="anomalie_chargement" value="Colis non scanne (prevu pour ce chauffeur-livreur)"> Colis non scanne (prevu pour ce chauffeur-livreur)</label>
+          <label><input type="checkbox" name="anomalie_chargement" value="Colis non prevu pour ce chauffeur-livreur (prevenir sans delai le service surete)"> Colis non prevu pour ce chauffeur-livreur (prevenir sans delai le service surete)</label>
+          <label><input type="checkbox" name="anomalie_chargement" value="Adhesif Colis Prive dans le vehicule"> Adhesif Colis Prive dans le vehicule</label>
+          <label><input type="checkbox" name="anomalie_chargement" value="Autre"> Autre</label>
+          <p class="hint">Active quand ANOMALIE = Oui.</p>
+        </fieldset>
+
+        <div class="question conditional" id="q21">
+          <label for="commentaires_colis"><span class="q-num">21</span> Commentaires (N° de colis...)</label>
+          <input id="commentaires_colis" name="commentaires_colis" type="text">
+          <p class="hint">Active quand ANOMALIE = Oui.</p>
+        </div>
+
+        <fieldset class="question conditional" id="q22">
+          <legend><span class="q-num">22</span> ANOMALIE DE VEHICULE</legend>
+          <label><input type="checkbox" name="anomalie_vehicule" value="Defaut de verrouillage"> Defaut de verrouillage</label>
+          <label><input type="checkbox" name="anomalie_vehicule" value="Passager non autorise"> Passager non autorise</label>
+          <label><input type="checkbox" name="anomalie_vehicule" value="Clef laissee sur le contact"> Clef laissee sur le contact</label>
+          <label><input type="checkbox" name="anomalie_vehicule" value="Manque separation cabine/caisse"> Manque separation cabine/caisse</label>
+          <label><input type="checkbox" name="anomalie_vehicule" value="Vehicule vitre"> Vehicule vitre</label>
+          <label><input type="checkbox" name="anomalie_vehicule" value="Etat general"> Etat general</label>
+          <p class="hint">Active quand ANOMALIE = Oui.</p>
+        </fieldset>
+
+        <div class="question conditional" id="q23">
+          <label for="commentaires_anomalie"><span class="q-num">23</span> Commentaires</label>
+          <input id="commentaires_anomalie" name="commentaires_anomalie" type="text">
+          <p class="hint">Active quand ANOMALIE = Oui.</p>
+        </div>
+      </section>
+
+      <section class="form-section" id="section-fin">
+        <div class="section-head">
+          <h2>4. Fin</h2>
+        </div>
+
+        <div class="question">
+          <label for="commentaires_divers"><span class="q-num">24</span> Commentaires divers</label>
+          <textarea id="commentaires_divers" name="commentaires_divers" rows="4"></textarea>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="submit">Soumettre le formulaire</button>
+      </div>
+    </form>
+
+    <output id="submit-result" class="submit-result" aria-live="polite"></output>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
